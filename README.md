@@ -1,71 +1,46 @@
-# Simple TypeScript Script Example
+# SNP Event Stream Example
 
-This example shows how to use [Photon JS](https://photonjs.prisma.io/) in a **simple TypeScript script** to read and write data in a database.
+This example shows a simple POC for implementing subscriptions using event sourcing.
 
-## How to use
+## Highlights
+- [The data model](https://github.com/terski/snp-event-stream/blob/master/prisma/schema.prisma#L27-L50)
+- [Create a subscription](https://github.com/terski/snp-event-stream/blob/master/src/subscriptions.ts#L11-L27)
+- [Cancel a subscription](https://github.com/terski/snp-event-stream/blob/master/src/subscriptions.ts#L32-L42)
+- [Save a snapshot for querying](https://github.com/terski/snp-event-stream/blob/master/src/subscriptions.ts#L68-L91)
+- [A test script](https://github.com/terski/snp-event-stream/blob/master/src/script.ts)
 
-### 1. Download example & install dependencies
-
-Clone the repository:
-
-```sh
-git clone git@github.com:prisma/photonjs.git
+### Test script output
 ```
-
-Install Node dependencies:
-
-```sh
-cd photonjs/examples/typescript/script
-npm install
+*** Aggregates
+[
+  {
+    "id": "cjyhpzwdr0000nirty2oabq4u",
+    "createdAt": "2019-07-24T20:48:27.565Z",
+    "type": "subscription",
+    "events": [
+      {
+        "id": "cjyhpzwe00001nirtywhfuup3",
+        "createdAt": "2019-07-24T20:48:27.576Z",
+        "type": "create",
+        "data": "{\"planId\":\"monthly\",\"startedAt\":\"2019-07-24T20:48:27.456Z\",\"expiresAt\":\"2019-08-23T20:48:27.456Z\"}"
+      },
+      {
+        "id": "cjyhpzwei0003nirto8rbs1ik",
+        "createdAt": "2019-07-24T20:48:27.594Z",
+        "type": "cancel",
+        "data": "{\"cancelledAt\":\"2019-08-03T20:48:27.591Z\"}"
+      }
+    ]
+  }
+]
+*** Latest snapshot
+{
+  id: 'cjyhpzwer0004nirt9dblp5fo',
+  createdAt: '2019-07-24T20:48:27.603Z',
+  aggregateId: 'cjyhpzwdr0000nirty2oabq4u',
+  startedAt: '2019-07-24T20:48:27.456Z',
+  planId: 'monthly',
+  cancelledAt: '2019-08-03T20:48:27.591Z',
+  expiresAt: '2019-08-23T20:48:27.456Z'
+}
 ```
-
-### 2. Install the Prisma 2 CLI
-
-To run the example, you need the [Prisma 2 CLI](https://github.com/prisma/prisma2/blob/master/docs/prisma-2-cli.md):
-
-```sh
-npm install -g prisma2
-```
-
-### 3. Set up database
-
-For this example, you'll use a simple [SQLite database](https://www.sqlite.org/index.html). To set up your database, run:
-
-```sh
-prisma2 lift save --name 'init'
-prisma2 lift up
-```
-
-You can now use the [SQLite Browser](https://sqlitebrowser.org/) to view and edit your data in the `./prisma/dev.db` file that was created when you ran `prisma2 lift up`.
-
-### 4. Generate Photon (type-safe database client)
-
-Run the following command to generate [Photon JS](https://photonjs.prisma.io/):
-
-```sh
-prisma2 generate
-```
-
-Now you can seed your database using the `seed` script from `package.json`:
-
-### 4. Seed the database data with this script
-
-Execute the script with this command:
-
-```sh
-npm run seed
-```
-
-### 5. Run the script
-
-Execute the script with this command:
-
-```sh
-npm run start
-```
-
-## Next steps
-
-- Read the [Prisma 2 announcement](https://www.prisma.io/blog/announcing-prisma-2-zq1s745db8i5/)
-- Check out the [Prisma 2 docs](https://github.com/prisma/prisma2)
-- Share your feedback in the [`prisma2-preview`](https://prisma.slack.com/messages/CKQTGR6T0/) channel on the Prisma Slack
