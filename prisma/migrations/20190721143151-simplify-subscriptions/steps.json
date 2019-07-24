@@ -1,0 +1,45 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "cancelledAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "expiresAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Subscription",
+      "name": "initialPayment"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Subscription",
+      "name": "trialEnd"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Subscription",
+      "name": "cancelled"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Subscription",
+      "name": "expiration"
+    }
+  ]
+}

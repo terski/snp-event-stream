@@ -1,0 +1,15 @@
+# IF THERE'S A GIT CONFLICT IN THIS FILE, DON'T SOLVE IT MANUALLY!
+# INSTEAD EXECUTE `prisma lift fix`
+# lift lockfile v1
+# Read more about conflict resolution here: TODO
+
+20190624162221-init
+20190720144407-aggregates
+20190720150908-ondelete
+20190720151519-ondelete-round2
+20190720220551-drop-versions
+20190721143151-simplify-subscriptions
+20190721143814-rename-event
+20190721212037-started-at
+20190721222150-subscription-to-aggregate
+20190724144934-remove-posts

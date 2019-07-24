@@ -1,0 +1,163 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "CreateModel",
+      "name": "Event",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateModel",
+      "name": "Aggregate",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Event",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Event",
+      "name": "createdAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "Expression": [
+          "now",
+          "DateTime",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Event",
+      "name": "version",
+      "type": {
+        "Base": "Int"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Event",
+      "name": "data",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Event",
+      "name": "aggregate",
+      "type": {
+        "Relation": {
+          "to": "Aggregate",
+          "to_fields": [
+            "id"
+          ],
+          "name": "AggregateToEvent",
+          "on_delete": "None"
+        }
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Aggregate",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Aggregate",
+      "name": "createdAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "Expression": [
+          "now",
+          "DateTime",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Aggregate",
+      "name": "type",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Aggregate",
+      "name": "version",
+      "type": {
+        "Base": "Int"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Aggregate",
+      "name": "events",
+      "type": {
+        "Relation": {
+          "to": "Event",
+          "to_fields": [],
+          "name": "AggregateToEvent",
+          "on_delete": "Cascade"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "aggregateId",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Aggregate",
+      "name": "subscription"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Subscription",
+      "name": "aggregate"
+    }
+  ]
+}

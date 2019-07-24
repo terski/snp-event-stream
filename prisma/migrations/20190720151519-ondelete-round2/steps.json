@@ -1,0 +1,33 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Event",
+      "name": "aggregate",
+      "type": {
+        "Relation": {
+          "to": "Aggregate",
+          "to_fields": [
+            "id"
+          ],
+          "name": "AggregateToEvent",
+          "on_delete": "None"
+        }
+      }
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Aggregate",
+      "name": "events",
+      "type": {
+        "Relation": {
+          "to": "Event",
+          "to_fields": [],
+          "name": "AggregateToEvent",
+          "on_delete": "Cascade"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator photon {
+  provider = "photonjs"
+}
+
+model User {
+  id    String  @default(cuid()) @id @unique
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        String   @default(cuid()) @id @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean
+  title     String
+  content   String?
+  author    User?
+}
+
+model AggregateEvent {
+  id        String   @default(cuid()) @id @unique
+  createdAt DateTime @default(now())
+  type      String
+  data      String
+  aggregate Aggregate
+}
+
+model Aggregate {
+  id        String   @default(cuid()) @id @unique
+  createdAt DateTime @default(now())
+  type      String
+  events    AggregateEvent[]  @relation(onDelete: CASCADE)
+}
+
+model Subscription {
+  id              String   @default(cuid()) @id @unique
+  createdAt       DateTime @default(now())
+  aggregateId     String
+  startedAt       DateTime
+  planId          String
+  cancelledAt     DateTime?
+  expiresAt       DateTime
+}

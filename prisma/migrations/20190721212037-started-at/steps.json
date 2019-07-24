@@ -1,0 +1,15 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "startedAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false
+    }
+  ]
+}

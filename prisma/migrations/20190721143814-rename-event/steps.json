@@ -1,0 +1,102 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "CreateModel",
+      "name": "AggregateEvent",
+      "embedded": false
+    },
+    {
+      "stepType": "DeleteModel",
+      "name": "Event"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "AggregateEvent",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "AggregateEvent",
+      "name": "createdAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "Expression": [
+          "now",
+          "DateTime",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "AggregateEvent",
+      "name": "type",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "AggregateEvent",
+      "name": "data",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "AggregateEvent",
+      "name": "aggregate",
+      "type": {
+        "Relation": {
+          "to": "Aggregate",
+          "to_fields": [
+            "id"
+          ],
+          "name": "AggregateToAggregateEvent",
+          "on_delete": "None"
+        }
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Aggregate",
+      "name": "events",
+      "type": {
+        "Relation": {
+          "to": "AggregateEvent",
+          "to_fields": [],
+          "name": "AggregateToAggregateEvent",
+          "on_delete": "Cascade"
+        }
+      }
+    }
+  ]
+}

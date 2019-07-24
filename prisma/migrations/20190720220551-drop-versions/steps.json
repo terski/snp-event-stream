@@ -1,0 +1,150 @@
+{
+  "version": "0.0.158",
+  "steps": [
+    {
+      "stepType": "CreateModel",
+      "name": "Subscription",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Event",
+      "name": "type",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Aggregate",
+      "name": "subscription",
+      "type": {
+        "Relation": {
+          "to": "Subscription",
+          "to_fields": [],
+          "name": "AggregateToSubscription",
+          "on_delete": "None"
+        }
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "createdAt",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "Expression": [
+          "now",
+          "DateTime",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "aggregate",
+      "type": {
+        "Relation": {
+          "to": "Aggregate",
+          "to_fields": [
+            "id"
+          ],
+          "name": "AggregateToSubscription",
+          "on_delete": "None"
+        }
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "planId",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "initialPayment",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "trialEnd",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "cancelled",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Subscription",
+      "name": "expiration",
+      "type": {
+        "Base": "DateTime"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Event",
+      "name": "version"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Aggregate",
+      "name": "version"
+    }
+  ]
+}
